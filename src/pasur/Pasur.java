@@ -104,6 +104,7 @@ public class Pasur
         Player lastPlayerWhoPickedAcard = players[0];
         int roundOfGame = 0;
         List<Card> cardList = new ArrayList<>(1);
+        // loop per round, until there is a winner
         while(winner == null)
         {
             roundOfGame++;
@@ -116,6 +117,10 @@ public class Pasur
                 pauseGame();
             }
 
+            /* loop for each subround when players play cards from their hand, 
+             then each subround deal out from deck until deck is empty -> end of round
+             * */
+            
             while (!deckHand.isEmpty())
             {
                 if (paused) {
