@@ -22,7 +22,7 @@ public class ScoringStrategyFactory {
 		}
 	}
 	
-	public void setDefaultStrategy(IScoringStrategy strat) {
+	public static void setDefaultStrategy(IScoringStrategy strat) {
 		defaultStrat = strat;
 	}
 	
