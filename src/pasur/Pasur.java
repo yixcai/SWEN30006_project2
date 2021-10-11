@@ -20,6 +20,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import ScoringStrategy.AceScoringStrategy;
+import ScoringStrategy.CompositeScoringStrategy;
+import ScoringStrategy.IScoringStrategy;
+import ScoringStrategy.JackScoringStrategy;
+import ScoringStrategy.ScoringStrategyFactory;
+import ScoringStrategy.SevenClubsScoringStrategy;
+import ScoringStrategy.TenOfDiamondsScoringStrategy;
+import ScoringStrategy.TwoOfClubsScoringStrategy;
+
 public class Pasur
 {
     public static final String VERSION = "1.0";
@@ -79,6 +88,9 @@ public class Pasur
             Hand surCards = new Hand(deck);
             player.setSurs(surCards);
         }
+        
+        // set default scoring strategy
+        ScoringConfiguration.setDefaultScoringStrategy();
     }
 
     public synchronized void pauseGame()

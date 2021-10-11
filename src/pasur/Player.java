@@ -239,11 +239,17 @@ public abstract class Player
     public int getScore()
     {
         // calculate score here
-    	ScoringStrategyFactory instance = ScoringStrategyFactory.getInstance();
-    	IScoringStrategy pickedScoring = instance.getDefaultCardScoringStrategy();
-    	IScoringStrategy surScoring = instance.getSursScoringStrategy();   	
-    	
-    	roundScore = pickedScoring.calculateScore(pickedCards,surs) + surScoring.calculateScore(pickedCards,surs);
+//    	ScoringStrategyFactory instance = ScoringStrategyFactory.getInstance();
+//    	IScoringStrategy pickedScoring = instance.getDefaultCardScoringStrategy();
+//    	IScoringStrategy surScoring = instance.getSursScoringStrategy();   	
+//    	
+//    	roundScore = pickedScoring.calculateScore(pickedCards,surs) + surScoring.calculateScore(pickedCards,surs);  	
+    	try {
+			roundScore = ScoringStrategyFactory.getDefaultScoringStrategy().calculateScore(pickedCards, surs);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	return roundScore + totalScore;
     }
