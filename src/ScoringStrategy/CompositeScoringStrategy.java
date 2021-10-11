@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ch.aplu.jcardgame.Hand;
 
 public class CompositeScoringStrategy implements IScoringStrategy{
-	ArrayList<IScoringStrategy> strats = new ArrayList<IScoringStrategy>();
+	private ArrayList<IScoringStrategy> strats = new ArrayList<IScoringStrategy>();
 	
 	public CompositeScoringStrategy() {}
 	
@@ -19,6 +19,10 @@ public class CompositeScoringStrategy implements IScoringStrategy{
 	
 	public void addStrategy(IScoringStrategy strat) {
 		strats.add(strat);
+	}
+	
+	public void removeStrategy(IScoringStrategy strat) {
+		strats.remove(strat);
 	}
 	
 }

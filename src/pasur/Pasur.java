@@ -529,15 +529,5 @@ public class Pasur
         int x = random.nextInt(hand.getNumberOfCards());
         return hand.get(x);
     }
-    
-//    public void writeToFile(String line, boolean append) {
-//    	try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename,append))){
-//    		bw.write(line);
-//    		bw.close();
-//    	} catch(FileNotFoundException fnf) {
-//    		fnf.printStackTrace();
-//    	} catch(IOException io) {
-//    		io.printStackTrace();
-//    	}
-//    }
+   
 }

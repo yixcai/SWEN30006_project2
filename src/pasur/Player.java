@@ -16,7 +16,7 @@ public abstract class Player
 {
     private static final int TARGET_VALUE = 11;
 
-    protected int id,score;
+    protected int id;
     protected Hand hand;
     protected Hand pickedCards;
     protected Hand surs;
