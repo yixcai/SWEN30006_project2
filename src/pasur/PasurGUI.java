@@ -21,6 +21,10 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,6 +34,9 @@ public class PasurGUI implements PropertyChangeListener
     private static final int SCREEN_WIDTH = 1024;
     private static final int SCREEN_HEIGHT = 650;
     private static final int GAP = 20;
+    
+    // Log file name
+    private static final String log_filename = "pasur.log";
 
     private final int cardWidth;
     private final int cardHeight;
@@ -49,7 +56,7 @@ public class PasurGUI implements PropertyChangeListener
     private Pasur pasur;
 
     public PasurGUI() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-            InstantiationException
+            InstantiationException, FileNotFoundException
     {
         pasur = new Pasur(2);
 
@@ -308,8 +315,13 @@ public class PasurGUI implements PropertyChangeListener
     }
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException,
-            InstantiationException, IllegalAccessException
+            InstantiationException, IllegalAccessException,FileNotFoundException
     {
-        new PasurGUI().startGame();
+    	// Set printstream to log file
+    	File logfile = new File(log_filename);
+		PrintStream stream = new PrintStream(logfile);
+		System.setOut(stream);
+	
+    	new PasurGUI().startGame();
     }
 }

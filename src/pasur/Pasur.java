@@ -12,6 +12,10 @@ import config.Configuration;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,6 +28,8 @@ public class Pasur
     public static final String ON_CARD_TRANSFER = "onCardTransfer";
     public static final String ON_GAME_END = "onGameEnd";
 
+   
+    
     // used for the simulation
     private static final Random random = new Random(Configuration.getInstance().getSeed());
 
@@ -42,9 +48,9 @@ public class Pasur
     private PropertyChangeSupport propertyChangePublisher = new PropertyChangeSupport(this);
 
     public Pasur(int nPlayers) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-            InstantiationException
-    {
-        // Instantiate players
+            InstantiationException, FileNotFoundException
+    {	
+    	// Instantiate players
         this.nPlayers = nPlayers;
 
         players = new Player[nPlayers];
@@ -259,9 +265,13 @@ public class Pasur
                     transfer(cardList, lastPlayerWhoPickedAcard.getPickedCards(), false);
                 }
             }
-
+       
             updateScores();
 
+            for(int i = 0; i < nPlayers; i++) {
+            	players[i].addTotal();
+            }
+            
             currentStartingPlayerPos++;
             if(currentStartingPlayerPos == nPlayers)
                 currentStartingPlayerPos = 0;
@@ -273,7 +283,7 @@ public class Pasur
             for(int i = 0; i < nPlayers; i++)
             {
                 Player player = players[i];
-                if(player.getScore() >= SCORE_TO_WIN)
+                if(player.getTotalScore() >= SCORE_TO_WIN)
                 {
                     if(playersWithEnoughScore == null)
                         playersWithEnoughScore = new ArrayList<>();
@@ -519,4 +529,15 @@ public class Pasur
         int x = random.nextInt(hand.getNumberOfCards());
         return hand.get(x);
     }
+    
+//    public void writeToFile(String line, boolean append) {
+//    	try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename,append))){
+//    		bw.write(line);
+//    		bw.close();
+//    	} catch(FileNotFoundException fnf) {
+//    		fnf.printStackTrace();
+//    	} catch(IOException io) {
+//    		io.printStackTrace();
+//    	}
+//    }
 }

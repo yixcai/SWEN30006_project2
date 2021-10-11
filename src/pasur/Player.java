@@ -9,18 +9,25 @@ import ch.aplu.jcardgame.*;
 
 import java.util.*;
 
+import ScoringStrategy.IScoringStrategy;
+import ScoringStrategy.ScoringStrategyFactory;
+
 public abstract class Player
 {
     private static final int TARGET_VALUE = 11;
 
-    protected int id;
+    protected int id,score;
     protected Hand hand;
     protected Hand pickedCards;
     protected Hand surs;
+   
+    protected int roundScore, totalScore;
 
     protected Player(int id)
     {
         this.id = id;
+        this.roundScore = 0;
+        this.totalScore = 0;
     }
 
     /**
@@ -231,8 +238,28 @@ public abstract class Player
 
     public int getScore()
     {
-        return 0;
+        // calculate score here
+    	ScoringStrategyFactory instance = ScoringStrategyFactory.getInstance();
+    	IScoringStrategy pickedScoring = instance.getDefaultCardScoringStrategy();
+    	IScoringStrategy surScoring = instance.getSursScoringStrategy();   	
+    	
+    	roundScore = pickedScoring.calculateScore(pickedCards,surs) + surScoring.calculateScore(pickedCards,surs);
+    	
+    	return roundScore + totalScore;
     }
+    
+    public int getTotalScore() {
+    	return totalScore;
+    }
+    
+    /**
+     * Adds round score to the running total score.
+     */
+    public void addTotal() {
+    	totalScore += roundScore;
+    	roundScore = 0;
+    }
+    
 
     abstract Card selectToPlay();
 }
