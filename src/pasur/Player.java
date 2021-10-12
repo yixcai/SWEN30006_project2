@@ -6,6 +6,7 @@ package pasur;
  */
 
 import ch.aplu.jcardgame.*;
+import scoring.ScoreStrategyFactory;
 
 import java.util.*;
 
@@ -17,6 +18,8 @@ public abstract class Player
     protected Hand hand;
     protected Hand pickedCards;
     protected Hand surs;
+    
+    protected int totalScore = 0; // total score, updated after every round
 
     protected Player(int id)
     {
@@ -34,7 +37,7 @@ public abstract class Player
         Set<Card> cardsToPick = null;
         if(playedCard != null)
         {
-            System.out.println(toString() + " plays " + Pasur.toString(playedCard));
+        	Pasur.writeToLog(toString() + " plays " + Pasur.toString(playedCard));
 
             cardsToPick = pickCards(pool, playedCard);
         }
@@ -228,10 +231,20 @@ public abstract class Player
     {
         return "Player" + id;
     }
+    
+    public int getTotalScore()
+    {
+    	return totalScore;
+    }
+    
+    public void setTotalScore(int newTotalScore)
+    {
+    	totalScore = newTotalScore;
+    }
 
     public int getScore()
-    {
-        return 0;
+    {	
+    	return ScoreStrategyFactory.getInstance().calculateScore(this);
     }
 
     abstract Card selectToPlay();
