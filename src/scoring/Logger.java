@@ -8,19 +8,22 @@ public class Logger {
 
 	public Logger() {}
 	
-	public static void init() {
-		// Create the pasur.log file
-    	try {
-	      File fileObject = new File("pasur.log");
-	      fileObject.createNewFile();
-	    } catch (IOException e) {
-	      e.printStackTrace();
-	    }
-	}
-	
 	// Write to pasur.log
     public static void writeToLog(String s)
     {
+    	// Create the pasur.log file if it doesn't exist yet
+    	File logFile = new File("pasur.log");
+    	if (!logFile.exists() || logFile.isDirectory()) { 
+        	try {
+    	      File fileObject = new File("pasur.log");
+    	      fileObject.createNewFile();
+    	    } catch (IOException e) {
+    	      e.printStackTrace();
+    	    }
+    		
+    	}
+    	
+    	// Now that it exists, write to it
     	try {
         	FileWriter myWriter = new FileWriter("pasur.log", true);
 	        myWriter.write(s+"\n");
@@ -29,5 +32,6 @@ public class Logger {
         } catch (IOException e) {
         	e.printStackTrace();
     	}
+    	
     }
 }
