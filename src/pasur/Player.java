@@ -244,7 +244,10 @@ public abstract class Player
 
     public int getScore()
     {	
-    	return ScoreStrategyFactory.getInstance().calculateScore(this);
+    	// Get an instance of the factory
+    	ScoreStrategyFactory factory = ScoreStrategyFactory.getInstance();
+    	// Return their existing score + new added score for this round
+    	return this.getTotalScore() + factory.getCompositeScoreStrategy().getAddedScore(this);
     }
 
     abstract Card selectToPlay();

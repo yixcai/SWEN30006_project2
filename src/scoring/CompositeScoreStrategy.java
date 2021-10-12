@@ -2,7 +2,10 @@ package scoring;
 
 import java.util.ArrayList;
 
+import ch.aplu.jcardgame.Card;
 import pasur.Player;
+import pasur.Rank;
+import pasur.Suit;
 
 public class CompositeScoreStrategy implements IScoreStrategy {
 	private ArrayList<IScoreStrategy> scoreStrategies = new ArrayList<IScoreStrategy>();

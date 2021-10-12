@@ -28,13 +28,13 @@ public class ForEachScoreStrategy implements IScoreStrategy {
 		int count = 0;
     	for (int i=0; i<pickedCardsList.size(); i++) {
     		Card pickedCard = pickedCardsList.get(i);
-    		if (ScoreStrategyFactory.cardMatches(pickedCard, suit, rank)) {
+    		if (cardMatches(pickedCard, suit, rank)) {
     			count++;
     		}
     	}
     	for (int i=0; i<sursList.size(); i++) {
     		Card surCard = sursList.get(i);
-    		if (ScoreStrategyFactory.cardMatches(surCard, suit, rank)) {
+    		if (cardMatches(surCard, suit, rank)) {
     			count++;
     		}
     	}
