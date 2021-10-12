@@ -6,6 +6,7 @@ package pasur;
  */
 
 import ch.aplu.jcardgame.*;
+import scoring.Logger;
 import scoring.ScoreStrategyFactory;
 
 import java.util.*;
@@ -37,7 +38,7 @@ public abstract class Player
         Set<Card> cardsToPick = null;
         if(playedCard != null)
         {
-        	Pasur.writeToLog(toString() + " plays " + Pasur.toString(playedCard));
+        	Logger.writeToLog(toString() + " plays " + Pasur.toString(playedCard));
 
             cardsToPick = pickCards(pool, playedCard);
         }

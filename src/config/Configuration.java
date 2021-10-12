@@ -3,7 +3,7 @@ package config;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
-import pasur.Pasur;
+import scoring.Logger;
 
 public class Configuration
 {
@@ -53,19 +53,19 @@ public class Configuration
 
         // Seed
         seed = Integer.parseInt(properties.getProperty(SEED_KEY));
-        Pasur.writeToLog("#Seed: " + seed);
+        Logger.writeToLog("#Seed: " + seed);
 
         // Animate
         animate = Boolean.parseBoolean(properties.getProperty(ANIMATE_KEY));
-        Pasur.writeToLog("#Animate: " + animate);
+        Logger.writeToLog("#Animate: " + animate);
 
         // Player0
         player0class = properties.getProperty(PLAYER0_KEY);
-        Pasur.writeToLog("#Player0: " + player0class);
+        Logger.writeToLog("#Player0: " + player0class);
 
         // Player1
         player1class = properties.getProperty(PLAYER1_KEY);
-        Pasur.writeToLog("#Player1: " + player1class);
+        Logger.writeToLog("#Player1: " + player1class);
     }
 
     public int getSeed()
