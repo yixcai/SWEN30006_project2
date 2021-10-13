@@ -6,6 +6,7 @@ package pasur;
  */
 
 import ch.aplu.jcardgame.*;
+import scoring.IScoreStrategy;
 import scoring.Logger;
 import scoring.ScoreStrategyFactory;
 
@@ -245,10 +246,12 @@ public abstract class Player
 
     public int getScore()
     {	
-    	// Get an instance of the factory
-    	ScoreStrategyFactory factory = ScoreStrategyFactory.getInstance();
+    	// Create a composite score strategy
+    	IScoreStrategy compStrat = ScoreStrategyFactory.getInstance().getCompositeScoreStrategy();
+    	// Get their new added score for this round
+    	int addedScore = compStrat.getAddedScore(this);
     	// Return their existing score + new added score for this round
-    	return this.getTotalScore() + factory.getCompositeScoreStrategy().getAddedScore(this);
+    	return this.getTotalScore() + addedScore;
     }
 
     abstract Card selectToPlay();

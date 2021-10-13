@@ -27,10 +27,14 @@ public class ScoreStrategyFactory {
 		CompositeScoreStrategy compStrat = new CompositeScoreStrategy();
     	
 		// Add all the leaf strategies to our compStrat
+		
+		// ------------------------- MINIMUM STRATEGIES -------------------------
     	// Player who has 7 or more clubs: 7 points (there are only
     	// 13 clubs so they must have the most if they have 7 or more)
     	compStrat.addScoreStrategy(new MinimumScoreStrategy(Suit.CLUBS, null, 7, 7));
+    	// ----------------------------------------------------------------------
     	
+    	// ------------------------- FOR EACH STRATEGIES -------------------------
     	// Player who has the 10 of diamonds: 3 points
     	compStrat.addScoreStrategy(new ForEachScoreStrategy(Suit.DIAMONDS, Rank.TEN, 3));
     	
@@ -42,9 +46,12 @@ public class ScoreStrategyFactory {
     	
     	// Each Jack: 1 point
     	compStrat.addScoreStrategy(new ForEachScoreStrategy(null, Rank.JACK, 1));
+    	// -----------------------------------------------------------------------
     	
+    	// ------------------------- SUR STRATEGIES -------------------------
     	// Each Sur: 5 points
     	compStrat.addScoreStrategy(new SurScoreStrategy(5));
+    	// ------------------------------------------------------------------
     	
     	return compStrat;
 	}

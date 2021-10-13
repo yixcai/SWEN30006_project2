@@ -19,10 +19,10 @@ public class CompositeScoreStrategy implements IScoreStrategy {
 	}
 	
 	public int getAddedScore(Player player) {
-		int score = 0;
+		int addedScore = 0;
 		for (int i=0; i<scoreStrategies.size(); i++) {
-			score += scoreStrategies.get(i).getAddedScore(player);
+			addedScore += scoreStrategies.get(i).getAddedScore(player);
 		}
-		return score;
+		return addedScore;
 	}
 }
